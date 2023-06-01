@@ -16,7 +16,7 @@ if ($conn->connect_error) {
 }
 
 // Define your SQL query here
-$sql = "SELECT * FROM run_data"; // Replace with your actual SQL query
+$sql = "SELECT * FROM runs"; // Replace with your actual SQL query
 
 $result = $conn->query($sql);
 
@@ -27,8 +27,6 @@ if ($result->num_rows > 0) {
   while($row = $result->fetch_assoc()) {
     array_push($data, $row);
   }
-} else {
-  echo "0 results";
 }
 
 echo json_encode($data);

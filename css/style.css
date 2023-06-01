@@ -1,8 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;1,400&display=swap');
+
+body{
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* div{
+  border : 1px solid red;
+} */
+
+.stat-value{
+  font-weight: 600;
+}
+
 #run-card {
     transition: transform .2s;
-  }
+}
   
-  #run-card:hover {
-    transform: scale(1.05);
-  }
+#run-card:hover {
+  transform: scale(1.2);
+  z-index: 1;
+}
+
+#run-time{
+  font-weight: 600;
+}
+
+.card {
+  box-shadow: 0 4px 12px 0 rgba(0,0,0,0.7);
+  transition: 0.3s;
+  border-radius: 6%;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.stats {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px 0;
+  border-bottom: 1px solid #ddd;
+}
+.stats div {
+  text-align: center;
+}
+
+.card-text{
+  line-height: 0.5em;
+}
+
+.time{
+  line-height: 3em;
+}
+
+.checkbox-wrapper {
+  width:40px;
+  height: 40px;
+  margin: 2px;
+  position: relative;
+}
+
+.custom-label, .custom-label-checked {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  border: 1px solid black;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.custom-label {
+  background: #fff;
+  color: #000;
+}
+
+.custom-label-checked {
+  background: green;
+  color: #fff;
+}
+#checkboxes{
+  margin-top: 8px;
+}
+#checboxes:hover{
+  cursor: none;
+}
+
+
   
