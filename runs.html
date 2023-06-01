@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Run Statistics</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    .stats {
+      display: flex;
+      justify-content: space-around;
+      padding: 20px 0;
+      border-bottom: 1px solid #ddd;
+    }
+    .stats div {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-4">
+    <div class="stats">
+      <div>
+        <h4 id="runsOverall">Biegi: 0/100</h4>
+      </div>
+      <div>
+        <h4 id="bestTime">Najlepszy czas: 00:00</h4>
+      </div>
+      <div>
+        <h4 id="avgTime">Średni czas: 00:00</h4>
+      </div>
+      <div>
+        <h4 id="exhaust">Forma: Świetna</h4>
+      </div>
+    </div>
+    <div class="row mt-4" id="runs">
+        <div class="col-md-4 mb-4" id="run-card">
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title" id="run-title">Run Title</h5>
+                <h6 class="card-subtitle mb-2 text-muted" id="run-date">Run Date</h6>
+                <p class="card-text" id="run-description">Run Description</p>
+                <p class="card-text"><small class="text-muted" id="run-duration">Run Duration</small></p>
+              </div>
+            </div>
+          </div>
+          
+    </div>
+  </div>
+  
+<script src="js/getTiles.js"></script>
+</body>
+</html>

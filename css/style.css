@@ -1,0 +1,8 @@
+#run-card {
+    transition: transform .2s;
+  }
+  
+  #run-card:hover {
+    transform: scale(1.05);
+  }
+  
