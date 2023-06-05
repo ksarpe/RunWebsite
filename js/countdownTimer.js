@@ -1,5 +1,5 @@
 var now = new Date().getTime();
-var countDownDate = new Date("June 12, 2023 06:00:00").getTime();
+var countDownDate = new Date("June 8, 2023 08:00:00").getTime();
 
 //Check if the date has passed
 if (now > countDownDate) {
