@@ -1,11 +1,13 @@
 <?php
+
 header('Content-Type: application/json');
 
 // Database credentials
-$servername = "hosting2385319.online.pro";
-$username = "00896778_amdin";
-$password = "Omoplata999@";
-$dbname = "00896778_amdin";
+$env = parse_ini_file(__DIR__ . '/../config/.env');
+$servername = $env['DB_HOST'];
+$dbname   = $env['DB_DATABASE'];
+$username = $env['DB_USERNAME'];
+$password = $env['DB_PASSWORD'];
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -30,10 +32,23 @@ $avgTimeSql = "SELECT SEC_TO_TIME(AVG(TIME_TO_SEC(time))) as avgTime FROM runs";
 $avgTimeResult = $conn->query($avgTimeSql);
 $avgTime = $avgTimeResult->fetch_assoc()['avgTime'] ?? '00:00:00'; // Default value is 'N/A'
 
+// Query to get the total calories
+$caloriesSql = "SELECT SUM(calories) as calories FROM runs";
+$caloriesResult = $conn->query($caloriesSql);
+$calories = $caloriesResult->fetch_assoc()['calories'] ?? '0'; // Default value is '0'
+
+// Latest weight
+$lastDaySql = "SELECT weight FROM weight";
+$lastDayResult = $conn->query($lastDaySql);
+$weight = $lastDayResult->fetch_assoc()['weight'] ?? '0'; // Default value is '0'
+
+
 $data = array(
   'runs' => $runs,
   'bestTime' => $bestTime,
-  'averageTime' => $avgTime
+  'averageTime' => $avgTime,
+  'calories' => $calories,
+  'weight' => $weight,
 );
 
 echo json_encode($data);

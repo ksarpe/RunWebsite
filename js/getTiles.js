@@ -37,15 +37,16 @@ fetch('./api/getRuns.php')
       `;
       
       // Update the card with the data from the run
-      card.querySelector(`#run-id-${run.id}`).textContent = "Dzień " + run.id;
+      card.querySelector(`#run-id-${run.id}`).textContent = "Day " + run.day;
       card.querySelector(`#run-time-${run.id}`).textContent = run.time;
-      if (run.id !== "1") {
+      if (run.day !== "1") {
         let differenceElement = card.querySelector(`#run-difference-${run.id}`);
-        differenceElement.textContent = "(" + timeDifference + ")";
         if (timeDifferenceInSeconds > 0) {
+          differenceElement.textContent = "(-" + timeDifference + ")";
           // If run time increased, make text red
           differenceElement.style.setProperty('color', 'red', 'important');
         } else if (timeDifferenceInSeconds < 0) {
+          differenceElement.textContent = "(+" + timeDifference + ")";
           // If run time decreased, make text green
           differenceElement.style.setProperty('color', 'green', 'important');
 

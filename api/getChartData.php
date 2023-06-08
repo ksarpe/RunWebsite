@@ -1,10 +1,11 @@
 <?php
 header('Content-Type: application/json');
 
-$servername = "hosting2385319.online.pro";
-$username = "00896778_amdin";
-$password = "Omoplata999@";
-$dbname = "00896778_amdin";
+$env = parse_ini_file(__DIR__ . '/../config/.env');
+$servername = $env['DB_HOST'];
+$dbname   = $env['DB_DATABASE'];
+$username = $env['DB_USERNAME'];
+$password = $env['DB_PASSWORD'];
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
