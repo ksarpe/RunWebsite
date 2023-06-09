@@ -93,5 +93,14 @@ body{
   justify-content: space-between;
 }
 
+@media (max-width: 992px) {
+  .col-md-4 {
+      -ms-flex: none;
+      flex: none;
+      max-width: none;
+  }
+}
+
+
 
   
