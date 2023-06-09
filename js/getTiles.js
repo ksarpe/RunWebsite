@@ -1,76 +1,44 @@
 // Fetch data from your PHP script
-fetch('./api/getRuns.php')
-  .then(response => response.json())
-  .then(data => {
-    // Sort data by id (day)
-    data.sort((a, b) => a.id - b.id);
-    
-    let previousRunTimeInSeconds = 0;
-    
+export function displayActivities(jsonData) {  
+  //console.log(json)
     // Create a tile for each run
-    data.forEach(run => {
-      // Calculate run time difference from previous run
-      const runTimeInSeconds = timeToSeconds(run.time);
-      const timeDifferenceInSeconds = runTimeInSeconds - previousRunTimeInSeconds;
-      const timeDifference = secondsToTime(timeDifferenceInSeconds);
-      
-      // Remember current run time for next iteration
-      previousRunTimeInSeconds = runTimeInSeconds;
-
+    jsonData.forEach((run, index) => {
       // Create a new card element
       const card = document.createElement('div');
       card.className = 'col-md-4 mb-4';
+      card.id = 'run-card';
       card.innerHTML = `
         <div class="card h-100">
           <div class="card-body">
-            <h6 class="card-subtitle mb-2 text-muted" id="run-id-${run.id}">ID</h6>
+          <div class="muted">
+            <h6 class="card-subtitle mb-2 text-muted d-inline" id="run-id-${index + 1}"></h6>
+            <h6 class="card-subtitle mb-2 text-muted d-inline" id="run-date-${index + 1}">08.06.23</h6>
+            <h6 class="card-subtitle mb-2 text-muted d-inline" id="run-difficulty-${index + 1}">HARD</h6>
+          </div>   
             <div class="text-center">
               <div class="time">
-                <h4 class="card-title d-inline" id="run-time-${run.id}">CZAS</h4>
-                <h6 class="text-success d-inline" id="run-difference-${run.id}"></h6>
+                <h4 class="card-title d-inline run-time" id="run-time-${index + 1}">CZAS</h4>
               </div>         
-              <h6 class="card-text d-inline" id="run-hour-${run.id}">GODZINA</h6>
-              <h6 class="card-text d-inline" id="run-location-${run.id}">MIEJSCE</h6>
+              <h6 class="card-title" id="run-kcal-${index + 1}">kcal: 1901</h6>        
             </div>                  
           </div>
         </div>
       `;
       
       // Update the card with the data from the run
-      card.querySelector(`#run-id-${run.id}`).textContent = "Day " + run.day;
-      card.querySelector(`#run-time-${run.id}`).textContent = run.time;
-      if (run.day !== "1") {
-        let differenceElement = card.querySelector(`#run-difference-${run.id}`);
-        if (timeDifferenceInSeconds > 0) {
-          differenceElement.textContent = "(-" + timeDifference + ")";
-          // If run time increased, make text red
-          differenceElement.style.setProperty('color', 'red', 'important');
-        } else if (timeDifferenceInSeconds < 0) {
-          differenceElement.textContent = "(+" + timeDifference + ")";
-          // If run time decreased, make text green
-          differenceElement.style.setProperty('color', 'green', 'important');
-
-          
-        }
-      }
-      card.querySelector(`#run-location-${run.id}`).textContent = run.location;
-      card.querySelector(`#run-hour-${run.id}`).textContent = run.hour;
+      //day name
+      card.querySelector(`#run-id-${index + 1}`).textContent = run['name'];
+      //start date and time
+      const { date, startTime } = splitDateTime(run['start_date_local']);
+      card.querySelector(`#run-date-${index + 1}`).textContent = date + " | " + startTime;
+      const time = secondsToTime(run['moving_time']);
+      card.querySelector(`#run-time-${index + 1}`).textContent = time;
+      card.querySelector(`#run-kcal-${index + 1}`).textContent = "kcal: "
       
       // Add the card to the DOM
       document.getElementById('runs').appendChild(card);
     });
-  })
-  .catch(error => console.error('Error:', error));
-
-// Function to convert time string to total seconds
-function timeToSeconds(time) {
-  let parts = time.split(':');
-  return parts[0] * 3600 + // hours
-         parts[1] * 60 +   // minutes
-         +parts[2];        // seconds
 }
-
-// Function to convert total seconds to time string
 function secondsToTime(secs) {
   if(secs < 0) secs *= -1;
   function pad(n) { return n<10 ? '0'+n : n }
@@ -79,4 +47,18 @@ function secondsToTime(secs) {
   var seconds = secs % 60;
   return pad(hours) + ':' + pad(minutes) + ':' + pad(seconds);
 }
-``
+
+function splitDateTime(isoString) {
+  const dateTime = new Date(isoString);
+    
+    const month = ("0" + (dateTime.getMonth() + 1)).slice(-2); // Get the month part and pad with a leading zero if necessary
+    const day = ("0" + dateTime.getDate()).slice(-2); // Get the day part and pad with a leading zero if necessary
+    const date = `${day}.${month}`; // Combine day and month to form the date string
+
+    const hour = ("0" + dateTime.getHours()).slice(-2) - 2; // Get the hour part and pad with a leading zero if necessary
+    const minute = ("0" + dateTime.getMinutes()).slice(-2); // Get the minute part and pad with a leading zero if necessary
+    const startTime = `${hour}:${minute}`; // Combine hour and minute to form the time string
+
+    return { date, startTime };
+}
+

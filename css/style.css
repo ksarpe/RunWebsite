@@ -4,16 +4,13 @@ body{
   font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
-/* div{
-  border : 1px solid red;
-} */
-
-.stat-value{
+.stat-value
+{
   font-weight: 600;
 }
 
 #run-card {
-    transition: transform .2s;
+    transition: transform .4s;
 }
   
 #run-card:hover {
@@ -21,14 +18,14 @@ body{
   z-index: 1;
 }
 
-#run-time{
+.run-time{
   font-weight: 600;
 }
 
 .card {
   box-shadow: 0 4px 12px 0 rgba(0,0,0,0.7);
   transition: 0.3s;
-  border-radius: 6%;
+  border-radius: 10%;
 }
 
 .card:hover {
@@ -75,8 +72,8 @@ body{
 }
 
 .custom-label {
-  background: #fff;
-  color: #000;
+  background: #9d9d9d;
+  color: white;
 }
 
 .custom-label-checked {
@@ -84,10 +81,16 @@ body{
   color: #fff;
 }
 #checkboxes{
-  margin-top: 8px;
+  padding: 20px 0;
+  border-bottom: 1px solid #ddd;
 }
-#checboxes:hover{
-  cursor: none;
+
+#checkboxes .checkbox-wrapper label:hover{
+  cursor:default;
+}
+.muted{
+  display: flex;
+  justify-content: space-between;
 }
 
 

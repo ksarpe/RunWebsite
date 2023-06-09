@@ -1,29 +1,16 @@
 // Function to fetch runs from the server, and then update the chart and checkboxes
-function fetchAndUpdateRuns() {
-  fetch('/api/getChartData.php')
-    .then(response => response.json())
-    .then(runs => {
-      updateChart(runs);
-      updateCheckboxes(runs);
-    })
-    .catch(error => console.error(error));
+export function updateChart(json) {
+      drawChart(json);
+      updateCheckboxes(json);
 }
 
-// Function to convert time string to total seconds
-function timeToSeconds(time) {
-  let parts = time.split(':');
-  return parts[0] * 3600 + // hours
-         parts[1] * 60 +   // minutes
-         +parts[2];        // seconds
-}
-
-function updateChart(runs) {
+function drawChart(json) {
   // Initialize an array with 100 elements, all set to 0
   let chartData = new Array(100).fill(0);
 
-  // Update the chartData array with your actual run times
-  runs.forEach(run => {
-    chartData[run.day - 1] = timeToSeconds(run.time)/60;
+  chartData[0] = 8542/3600; //8542 from first day off strava
+  json.forEach((run, index) => {
+    chartData[index + 1] = run["moving_time"]/3600;
   });
 
   let ctx = document.getElementById('myChart').getContext('2d');
@@ -47,21 +34,49 @@ function updateChart(runs) {
       },
       scales: {
         y: {
-          beginAtZero: true
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: 'Hours'
+          }
+        },
+        x: {
+          title: {
+            display: true,
+            text: 'Run'
+          }
         }
       }
     }
   });
 }
 
-function updateCheckboxes(runs) {
+function updateCheckboxes(json) {
   let checkboxesDiv = document.getElementById("checkboxes");
 
   // Clear old checkboxes
   checkboxesDiv.innerHTML = '';
 
-  for (let i = 1; i <= 100; i++) {
-      let runForDay = runs.find(run => run.day === i.toString());
+  let checkboxWrapper = document.createElement('div');
+    checkboxWrapper.className = 'checkbox-wrapper';
+
+    let checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.id = "day1";
+    checkbox.hidden = true;
+    checkbox.checked = true;
+
+    let label = document.createElement('label')
+    label.htmlFor = "day1";
+    label.className = "custom-label-checked";
+    label.appendChild(document.createTextNode(1));
+
+    checkboxWrapper.appendChild(checkbox);
+    checkboxWrapper.appendChild(label);
+    checkboxesDiv.appendChild(checkboxWrapper);
+
+  for (let i = 2; i <= 100; i++) {
+      let runForDay = json.find((_, index) => index+2 === i);
 
       let checkboxWrapper = document.createElement('div');
       checkboxWrapper.className = 'checkbox-wrapper';
@@ -85,6 +100,3 @@ function updateCheckboxes(runs) {
       checkboxesDiv.appendChild(checkboxWrapper);
   }
 }
-
-// Fetch runs from the server and update the chart and checkboxes when the page loads
-fetchAndUpdateRuns();
