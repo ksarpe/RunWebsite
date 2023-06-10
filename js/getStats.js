@@ -6,7 +6,10 @@ export function displayStats(json){
   document.getElementById('progress').textContent = 100 - len;
   
   // show total KM
-  document.getElementById('total').textContent = 21.1 * (len);
+  let totalKM = json.reduce((sum, element) => {
+    return sum + element["distance"]/1000;
+  }, 0);
+  document.getElementById('total').textContent = (totalKM + 21.1).toFixed(1);
   
   // show best time
   let minTime = json.reduce((min, element) => {
@@ -19,7 +22,7 @@ export function displayStats(json){
 
   minTime = minTime < 8542 ? minTime : 8542; //8542 from first day off strava
 
-  document.getElementById('best-time').textContent = secondsToTime(minTime);
+  document.getElementById('best-time-run').textContent = secondsToTime(minTime);
 
   // show average time
   let sumTime = json.reduce((sum, element) => {
@@ -27,7 +30,7 @@ export function displayStats(json){
   }, 0);
 
   let avgTime = (sumTime + 8542) / len;  //8542 from first day off strava
-  document.getElementById('average').textContent = secondsToTime(avgTime);
+  document.getElementById('average-run').textContent = secondsToTime(avgTime);
 
   //eventually add calories
 }

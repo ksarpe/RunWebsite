@@ -5,7 +5,7 @@ import { updateChart } from '../js/getChart.js';
 const auth_link = "https://www.strava.com/oauth/token"
 //if any problem, try to fetch new refresh token with authorization code. with activity:read_all scope
 
-function reAuthorize() {
+export function reAuthorize(statusCode) {
     // I KNOW THAT THIS IS HERE AND I DON'T GIVE A FUCK
     const details = {
         'client_id': '108719',
@@ -22,7 +22,7 @@ function reAuthorize() {
     }
     formBody = formBody.join("&");
 
-    fetch(auth_link, {
+    return fetch(auth_link, {
         method: 'post',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
@@ -30,24 +30,32 @@ function reAuthorize() {
         body: formBody
     })
     .then(res => res.json())
-    .then(res => getActivities(res))
+    .then(res => getActivities(res, statusCode))
+    .catch((err) => console.log('Error: ', err));
+   
 }
 
 
-function getActivities(data){
+function getActivities(data, statusCode){
     const activities_link = `https://www.strava.com/api/v3/athlete/activities?access_token=${data.access_token}`;
-    fetch(activities_link)
-        .then((res) => res.json())
-        .then((json) => {
-            displayActivities(json)
-            return json;
-        })
-        .then((json) => {
-            displayStats(json)
-            return json;
-        })
-        .then((json) => updateChart(json))
-        .catch((err) => console.log('Error: ', err));
+    if (statusCode === 1) {
+        return fetch(activities_link)
+            .then(res => res.json())
+            .then(res => {
+                return res;
+            })
+    }
+    else{
+        return fetch(activities_link)
+            .then((res) => res.json())
+            .then((json) => {
+                displayActivities(json)
+                return json;
+            })
+            .then((json) => {
+                displayStats(json)
+                return json;
+            })
+            .then((json) => updateChart(json))
+        }
 }
-
-reAuthorize();

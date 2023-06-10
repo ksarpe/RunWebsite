@@ -8,7 +8,8 @@
 <body>
   <div class="container mt-4">
     <div class="title" style="text-align: center; font-style: italic;">
-      <h1>100 HALF-MARATHONS IN 100 DAYS BY KASPER</h1>
+      <h1>100 HALF-IRONMAN DISCIPLINES</h1>
+      <h1>(33S/33B/33R + FULL)</h1>
     </div>
     <div class="stats">
       <div>
@@ -18,17 +19,34 @@
         <h4 id="kmTotal">Total KM: <span class="stat-value" id="total">21.1</span></h4>
       </div>  
       <div>
-        <h4 id="bestTime">Best: <span class="stat-value" id="best-time">02:22:22</span></h4>
+        <h4 id="weightOv">Weight: <span class="stat-value" id="weight">89 (-1)</span></h4>
       </div>
       <div>
-        <h4 id="avgTime">Avg: <span class="stat-value" id="average">02:22:22</span></h4>
-      </div>
-      <div>
-        <h4 id="weightOv">Weight: <span class="stat-value" id="weight">90 (-0)</span></h4>
-      </div>
-      <div>
-        <h4 id="kcalOverall">Calories: <span class="stat-value" id="calories">1901</span></h4>
+        <h4 id="kcalOverall">Calories: <span class="stat-value" id="calories">6268</span></h4>
       </div>         
+    </div>
+    <div class="stats">
+      <div>
+        <h4 id="bestTime">Best run: <span class="stat-value" id="best-time-run">02:22:22</span></h4>
+      </div>
+      <div>
+        <h4 id="avgTime">Avg run: <span class="stat-value" id="average-run">02:22:22</span></h4>
+      </div>
+      <div>
+        <h4 id="bestTime">Best bike: <span class="stat-value" id="best-time-bike">00:00:00</span></h4>
+      </div>
+      <div>
+        <h4 id="avgTime">Avg bike: <span class="stat-value" id="average-bike">00:00:00</span></h4>
+      </div>
+      <div>
+        <h4 id="bestTime">Best swim: <span class="stat-value" id="best-time-swim">00:00:00</span></h4>
+      </div>
+      <div>
+        <h4 id="avgTime">Avg swim: <span class="stat-value" id="average-swim">00:00:00</span></h4>
+      </div>
+    </div>
+    <div style="text-align: center;">
+      <a class="btn btn-primary btn-map" href="./map">SHOW MAP</a>
     </div>
     <div id="checkboxes" class="d-flex flex-wrap justify-content-center">
       <!-- //JS -->
@@ -38,29 +56,14 @@
         <canvas id="myChart"></canvas>
       </div> 
     </div>
+  
 
     <div class="row mt-4" id="runs"> 
-      <div class="col-md-4 mb-4" id="run-card">
-        <div class="card h-100">
-          <div class="card-body">
-            <div class="muted">
-              <h6 class="card-subtitle mb-2 text-muted d-inline" id="run-id">Day 1</h6>
-              <h6 class="card-subtitle mb-2 text-muted d-inline" id="run-date">08-06 | 11:48</h6>
-              <h6 class="card-subtitle mb-2 text-muted d-inline" id="run-difficulty">HARD</h6>
-            </div>       
-            <div class="text-center">
-              <div class="time">
-                <h4 class="card-title d-inline run-time" id="run-time">02:22:22</h4>
-              </div> 
-              <h6 class="card-title" id="run-kcal">kcal: 1901</h6>        
-            </div>                  
-          </div>
-        </div>
-      </div>
+      <!-- //JS -->
     </div>
   </div>
-  
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script type="module" src="api/strava_api.js"></script>
+<script type="module" src="js/callStrava.js"></script>
 </body>
 </html>

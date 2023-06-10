@@ -100,6 +100,33 @@ body{
       max-width: none;
   }
 }
+.btn-map{
+  width:30%;
+  margin-top:1em;
+  border-radius: 50%;
+  font-weight: 600;
+  background-color: rgb(21, 170, 121);
+}
+.last-day{
+  border: 3px solid gold;
+}
+
+.discipline{
+  font-weight: bold;
+}
+.distance{
+  font-style: italic;
+}
+
+.run-tile{
+  color: rgb(107, 224, 107)
+}
+.bike-tile{
+  color:rgb(222, 182, 89)
+}
+.swim-tile{
+  color:rgb(89, 222, 222)
+}
 
 
 
