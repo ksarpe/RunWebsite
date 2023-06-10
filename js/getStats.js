@@ -12,27 +12,56 @@ export function displayStats(json){
   document.getElementById('total').textContent = (totalKM + 21.1).toFixed(1);
   
   // show best time
-  let minTime = json.reduce((min, element) => {
-    if(element.time < min) {
-        return element.time;
-    } else {
-        return min;
+  let minTimeRun = 8542, minTimeBike = Infinity, minTimeSwim = Infinity;
+  let sumTimeRun = 8542, sumTimeBike = 0, sumTimeSwim = 0;
+  let countRun = 1, countBike = 0, countSwim = 0;
+
+  json.forEach((element) => {
+    switch (element.type) {
+      case 'Run':
+        if (element.moving_time < minTimeRun) {
+          minTimeRun = element.moving_time;
+        }
+        sumTimeRun += element.moving_time;
+        countRun++;
+        break;
+      case 'Bike':
+        if (element.moving_time < minTimeBike) {
+          minTimeBike = element.moving_time;
+        }
+        sumTimeBike += element.moving_time;
+        countBike++;
+        break;
+      case 'Swim':
+        if (element.moving_time < minTimeSwim) {
+          minTimeSwim = element.moving_time;
+        }
+        sumTimeSwim += element.moving_time;
+        countSwim++;
+        break;
     }
-  }, json[0]["moving_time"]);
+  });
 
-  minTime = minTime < 8542 ? minTime : 8542; //8542 from first day off strava
+  // Ensure that if no data was found for an activity type, the minTime is set to 0
+  minTimeRun = minTimeRun === Infinity ? 0 : minTimeRun;
+  minTimeBike = minTimeBike === Infinity ? 0 : minTimeBike;
+  minTimeSwim = minTimeSwim === Infinity ? 0 : minTimeSwim;
 
-  document.getElementById('best-time-run').textContent = secondsToTime(minTime);
+  // Calculate averages
+  let avgTimeRun = countRun > 0 ? sumTimeRun / countRun : 0;
+  let avgTimeBike = countBike > 0 ? sumTimeBike / countBike : 0;
+  let avgTimeSwim = countSwim > 0 ? sumTimeSwim / countSwim : 0;
 
-  // show average time
-  let sumTime = json.reduce((sum, element) => {
-    return sum + element["moving_time"];
-  }, 0);
+  // Display the results
+  document.getElementById('best-time-run').textContent = "(" + secondsToTime(minTimeRun) + ")";
+  document.getElementById('average-run').textContent = "(" + secondsToTime(avgTimeRun) + ")";
 
-  let avgTime = (sumTime + 8542) / len;  //8542 from first day off strava
-  document.getElementById('average-run').textContent = secondsToTime(avgTime);
+  document.getElementById('best-time-bike').textContent = "(" + secondsToTime(minTimeBike) + ")";
+  document.getElementById('average-bike').textContent = "(" + secondsToTime(avgTimeBike) + ")";;
 
-  //eventually add calories
+  document.getElementById('best-time-swim').textContent = "(" + secondsToTime(minTimeSwim) + ")";;
+  document.getElementById('average-swim').textContent = "(" + secondsToTime(avgTimeSwim) + ")";;
+
 }
 
 function secondsToTime(secs) {

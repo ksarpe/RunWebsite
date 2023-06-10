@@ -50,21 +50,21 @@ function drawChart(json) {
           label: 'Run',
           data: chartDataRun,
           fill: false,
-          borderColor: 'rgb(75, 192, 192)',
+          borderColor: 'rgb(107, 224, 107)',
           tension: 0.1
         },
         {
           label: 'Bike',
           data: chartDataBike,
           fill: false,
-          borderColor: 'rgb(192, 75, 75)',
+          borderColor: 'rgb(222, 182, 89)',
           tension: 0.1
         },
         {
           label: 'Swim',
           data: chartDataSwim,
           fill: false,
-          borderColor: 'rgb(75, 75, 192)',
+          borderColor: 'rgb(89, 222, 222)',
           tension: 0.1
         }
       ]
