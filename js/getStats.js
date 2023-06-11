@@ -1,6 +1,6 @@
 export function displayStats(json){
   if(json.length == 0) return;
-  const len = json.length + 1; // +1 because of first day off strava
+  const len = json.length
   
   // show progress
   document.getElementById('progress').textContent = 100 - len;
@@ -9,12 +9,12 @@ export function displayStats(json){
   let totalKM = json.reduce((sum, element) => {
     return sum + element["distance"]/1000;
   }, 0);
-  document.getElementById('total').textContent = (totalKM + 21.1).toFixed(1);
+  document.getElementById('total').textContent = totalKM.toFixed(1);
   
   // show best time
-  let minTimeRun = 8542, minTimeBike = Infinity, minTimeSwim = Infinity;
-  let sumTimeRun = 8542, sumTimeBike = 0, sumTimeSwim = 0;
-  let countRun = 1, countBike = 0, countSwim = 0;
+  let minTimeRun = 0, minTimeBike = Infinity, minTimeSwim = Infinity;
+  let sumTimeRun = 0, sumTimeBike = 0, sumTimeSwim = 0;
+  let countRun = 0, countBike = 0, countSwim = 0;
 
   json.forEach((element) => {
     switch (element.type) {
@@ -57,10 +57,13 @@ export function displayStats(json){
   document.getElementById('average-run').textContent = "(" + secondsToTime(avgTimeRun) + ")";
 
   document.getElementById('best-time-bike').textContent = "(" + secondsToTime(minTimeBike) + ")";
-  document.getElementById('average-bike').textContent = "(" + secondsToTime(avgTimeBike) + ")";;
+  document.getElementById('average-bike').textContent = "(" + secondsToTime(avgTimeBike) + ")";
 
-  document.getElementById('best-time-swim').textContent = "(" + secondsToTime(minTimeSwim) + ")";;
-  document.getElementById('average-swim').textContent = "(" + secondsToTime(avgTimeSwim) + ")";;
+  document.getElementById('best-time-swim').textContent = "(" + secondsToTime(minTimeSwim) + ")";
+  document.getElementById('average-swim').textContent = "(" + secondsToTime(avgTimeSwim) + ")";
+
+  //Show also total time from this values
+  document.getElementById('totalTime').textContent = secondsToTime(sumTimeRun + sumTimeBike + sumTimeSwim);
 
 }
 

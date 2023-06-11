@@ -4,13 +4,24 @@
   <title>HALF-IRONMANS</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link href="css/style.css" rel="stylesheet">
+  <link href="css/loader.css" rel="stylesheet">
   <link rel="shortcut icon" type="image/png" href="img/favicon.ico"/>
 </head>
 <body>
-  <div class="container mt-4">
-    <div class="title" style="text-align: center; font-style: italic;">
-      <h1>100 DAYS OF IRONMAN PREPARATION</h1>
-      <h1>RUN 21KM(33x), BIKE 70KM(33x), SWIM 1.9KM(33x) + FULL</h1>
+  <!-- transparent background -->
+  <div id="bg"></div>
+  <!-- LOADER -->
+  <div id="loadingSpinner" class="spinner">
+    <img src="/img/loader.gif" alt="Loading...">
+    <p class="loading-text">Running...</p>
+  </div>
+
+
+
+  <div class="container mt-4" id="content">
+    <div class="title">
+      <h1 class="shadow-title">100 DAYS OF IRONMAN PREPARATION BY <span class="title-name">KASPER</span></h1>
+      <h2 style="font-style: normal;">(SWIM 1.9KM)  (BIKE 70KM)  (RUN 21KM) + FULL</h2>
     </div>
     <div class="stats">
       <div>
@@ -20,10 +31,13 @@
         <h4 id="kmTotal">Total KM: <span class="stat-value" id="total">21.1</span></h4>
       </div>  
       <div>
+        <h4 id="timeTotal">Total time: <span class="stat-value" id="totalTime">0</span></h4>
+      </div> 
+      <div>
         <h4 id="weightOv">Weight: <span class="stat-value" id="weight">89 (-1)</span></h4>
       </div>
       <div>
-        <h4 id="kcalOverall">Calories: <span class="stat-value" id="calories">6268</span></h4>
+        <h4 id="kcalOverall">Calories: <span class="stat-value" id="calories">8756</span></h4>
       </div>         
     </div>
     <div class="stats">
@@ -62,7 +76,11 @@
     <div class="row mt-4" id="runs"> 
       <!-- //JS -->
     </div>
+    <footer class="footer">
+      <p class="text-muted"> &copy; 2023 Ironman preparation by Kasper | All rights reserved.</p>
+    </footer>
   </div>
+  
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script type="module" src="js/callStrava.js"></script>

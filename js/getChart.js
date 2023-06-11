@@ -11,13 +11,11 @@ function drawChart(json) {
   let chartDataSwim = new Array(33).fill(0);
 
   // Initialize separate counters for each activity type
-  chartDataRun[0] = 8542 / 3600; 
-  let countRun = 1;
+  let countRun = 0;
   let countBike = 0;
   let countSwim = 0;
 
   json.slice().reverse().forEach((activity) => {
-    console.log(activity.name);
     switch (activity.type) {
       case 'Run':
         if (countRun < 33) {
@@ -101,29 +99,11 @@ function updateCheckboxes(json) {
 
   // Clear old checkboxes
   checkboxesDiv.innerHTML = '';
+  
+  json.reverse(); //reverse for correct order in checkboxes
 
-  let checkboxWrapper = document.createElement('div');
-    checkboxWrapper.className = 'checkbox-wrapper';
-
-    let checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.id = "day1";
-    checkbox.hidden = true;
-    checkbox.checked = true;
-
-    let label = document.createElement('label')
-    label.htmlFor = "day1";
-    label.className = "custom-label-checked";
-    label.appendChild(document.createTextNode("R"));
-
-    checkboxWrapper.appendChild(checkbox);
-    checkboxWrapper.appendChild(label);
-    checkboxesDiv.appendChild(checkboxWrapper);
-
-    json.reverse(); //reverse for correct order in checkboxes
-
-  for (let i = 2; i <= 100; i++) {
-      let runForDay = json.find((_, index) => index+2 === i);
+  for (let i = 1; i <= 100; i++) {
+      let runForDay = json.find((_, index) => index+1 === i);
 
       let checkboxWrapper = document.createElement('div');
       checkboxWrapper.className = 'checkbox-wrapper';
@@ -133,24 +113,25 @@ function updateCheckboxes(json) {
       checkbox.id = "day" + i;
       checkbox.hidden = true;
 
-      if (runForDay) {
-          checkbox.checked = true;
-      }
-
       let label = document.createElement('label')
       label.htmlFor = "day" + i;
       label.className = checkbox.checked ? "custom-label-checked" : "custom-label";
+      if(json.length > 0 && i <= json.length){
+        if(json[i-1].type === "Run"){
+          label.classList.add("run-title-bg");
+        }
+        else if(json[i-1].type === "Ride"){
+          label.classList.add("bike-title-bg");
+        }
+        else if(json[i-1].type === "Swim"){
+          label.classList.add("swim-title-bg");
+        }
+      }
       if(i === 100){
         label.classList.add("last-day");
       }
-      if(json.length > 0 && i - 1 <= json.length){
-        let discipline = json[i - 2].type.slice(0, 1).toUpperCase();
-        if (json[i-2].type == "Ride") {discipline = "B";}
-        label.appendChild(document.createTextNode(discipline));
-      }
-      else{
-        label.appendChild(document.createTextNode(i));
-      }
+      label.appendChild(document.createTextNode(i));
+      
 
       checkboxWrapper.appendChild(checkbox);
       checkboxWrapper.appendChild(label);

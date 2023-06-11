@@ -2,6 +2,8 @@
 
 body{
   font-family: 'Plus Jakarta Sans', sans-serif;
+  height: 100%;
+  margin: 0;
 }
 
 .stat-value
@@ -42,6 +44,14 @@ body{
   text-align: center;
 }
 
+.title{
+  text-align: center; 
+  font-style: italic;
+}
+.shadow-title{
+  text-shadow: 2px 2px 8px #2f2f2f;
+}
+
 .card-text{
   line-height: 0.5em;
 }
@@ -74,11 +84,6 @@ body{
 .custom-label {
   background: #9d9d9d;
   color: white;
-}
-
-.custom-label-checked {
-  background: green;
-  color: #fff;
 }
 #checkboxes{
   padding: 20px 0;
@@ -119,14 +124,41 @@ body{
 }
 
 .run-tile{
-  color: rgb(107, 224, 107)
+  color: rgb(107, 224, 107);
+}
+.run-title-bg{
+  background-color: rgb(107, 224, 107);
+  color: #fff;
 }
 .bike-tile{
   color:rgb(222, 182, 89)
 }
+.bike-title-bg{
+  background-color:rgb(222, 182, 89);
+  color: #fff;
+}
 .swim-tile{
   color:rgb(89, 222, 222)
 }
+.swim-title-bg{
+  background-color:rgb(89, 222, 222);
+  color: #fff;
+}
+
+.footer {
+  background-color: #ffffff; /* Light grey color from Bootstrap */
+  color: #212529; /* Dark grey color from Bootstrap */
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 30px; /* Added margin-top for space between content and footer */
+  font-size: 0.8em;
+  width: 100%;
+}
+.title-name{
+  color:rgb(58, 164, 129)
+}
+
+
 
 
 

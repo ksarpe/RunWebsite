@@ -1,8 +1,6 @@
 // Fetch data from your PHP script
 export function displayActivities(jsonData) {  
-  //console.log(json)
     // Create a tile for each run
-    console.log(jsonData);
     jsonData.forEach((run, index) => {
       // Create a new card element
       const card = document.createElement('div');
@@ -52,30 +50,6 @@ export function displayActivities(jsonData) {
       // Add the card to the DOM
       document.getElementById('runs').appendChild(card);
     });
-
-    //Last hardcoded element
-    const card = document.createElement('div');
-    card.className = 'col-md-4 mb-4';
-    card.id = 'run-card';
-    card.innerHTML = `
-      <div class="card h-100">
-      <div class="card-body">
-        <div class="muted">
-          <h6 class="card-subtitle mb-2 text-muted d-inline" id="run-id">Day 1</h6>
-          <h6 class="card-subtitle mb-2 text-muted d-inline" id="run-date">08.06</h6>
-        </div>       
-        <div class="text-center">
-          <div class="time">
-            <h4 class="card-title d-inline run-time" id="run-time">02:22:22</h4>
-          </div> 
-          <h4 class="card-title discipline run-tile" id="discipline">RUN</h4>
-          <h4 class="card-title d-inline distance" id="distance">21.1KM</h4>
-        </div>                  
-      </div>
-    </div>
-    `;
-    document.getElementById('runs').appendChild(card);
-
 }
 function secondsToTime(secs) {
   if(secs < 0) secs *= -1;

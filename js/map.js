@@ -1,9 +1,8 @@
 import { reAuthorize } from '/../api/strava_api.js'
 
-
 reAuthorize(1).then(res => {
     //Set track amount above the map
-    document.querySelector('#track-amount').textContent = res.length;
+    document.querySelector('#track-amount').textContent = res.length - 1;
 
     var map = L.map('map').setView([51.7592, 19.4560], 13);
 
