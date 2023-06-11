@@ -25,7 +25,7 @@ function drawChart(json) {
           countRun++;
         }
         break;
-      case 'Bike':
+      case 'Ride':
         if (countBike < 33) {
           chartDataBike[countBike] = activity["moving_time"] / 3600;
           countBike++;
@@ -120,6 +120,8 @@ function updateCheckboxes(json) {
     checkboxWrapper.appendChild(label);
     checkboxesDiv.appendChild(checkboxWrapper);
 
+    json.reverse(); //reverse for correct order in checkboxes
+
   for (let i = 2; i <= 100; i++) {
       let runForDay = json.find((_, index) => index+2 === i);
 
@@ -142,7 +144,8 @@ function updateCheckboxes(json) {
         label.classList.add("last-day");
       }
       if(json.length > 0 && i - 1 <= json.length){
-        const discipline = json[i - 2].type.slice(0, 1).toUpperCase();
+        let discipline = json[i - 2].type.slice(0, 1).toUpperCase();
+        if (json[i-2].type == "Ride") {discipline = "B";}
         label.appendChild(document.createTextNode(discipline));
       }
       else{

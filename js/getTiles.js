@@ -14,7 +14,6 @@ export function displayActivities(jsonData) {
           <div class="muted">
             <h6 class="card-subtitle mb-2 text-muted d-inline" id="run-id-${index + 1}"></h6>
             <h6 class="card-subtitle mb-2 text-muted d-inline" id="run-date-${index + 1}">08.06.23</h6>
-            <h6 class="card-subtitle mb-2 text-muted d-inline" id="run-hour-${index + 1}">20:00</h6>
           </div>   
             <div class="text-center">
               <div class="time">
@@ -30,16 +29,21 @@ export function displayActivities(jsonData) {
       // Update the card with the data from the run
       // Name (day 1 etc..) start date and time, text muted at the top
       card.querySelector(`#run-id-${index + 1}`).textContent = run['name'];
-      const { date, startTime } = splitDateTime(run['start_date_local']);
+      const date = splitDateTime(run['start_date_local']);
       card.querySelector(`#run-date-${index + 1}`).textContent = date;
       const time = secondsToTime(run['moving_time']);
       card.querySelector(`#run-time-${index + 1}`).textContent = time;
-      card.querySelector(`#run-hour-${index + 1}`).textContent = startTime;
 
       //discipline
-      card.querySelector(`#discipline-${index + 1}`).textContent = run['type'].toUpperCase();
+      if(run['type'] == "Ride"){
+        card.querySelector(`#discipline-${index + 1}`).textContent = "BIKE";
+      }
+      else{
+        card.querySelector(`#discipline-${index + 1}`).textContent = run['type'].toUpperCase();
+      }
+
       if(run.type == "Run") card.querySelector(`#discipline-${index + 1}`).classList.add("run-tile");
-      else if(run.type == "Bike") card.querySelector(`#discipline-${index + 1}`).classList.add("bike-tile");
+      else if(run.type == "Ride") card.querySelector(`#discipline-${index + 1}`).classList.add("bike-tile");
       else if(run.type == "Swim") card.querySelector(`#discipline-${index + 1}`).classList.add("swim-tile");
 
       //distance
@@ -58,8 +62,7 @@ export function displayActivities(jsonData) {
       <div class="card-body">
         <div class="muted">
           <h6 class="card-subtitle mb-2 text-muted d-inline" id="run-id">Day 1</h6>
-          <h6 class="card-subtitle mb-2 text-muted d-inline" id="run-date">08-06</h6>
-          <h6 class="card-subtitle mb-2 text-muted d-inline" id="run-hour">11:48</h6>
+          <h6 class="card-subtitle mb-2 text-muted d-inline" id="run-date">08.06</h6>
         </div>       
         <div class="text-center">
           <div class="time">
@@ -90,10 +93,6 @@ function splitDateTime(isoString) {
     const day = ("0" + dateTime.getDate()).slice(-2); // Get the day part and pad with a leading zero if necessary
     const date = `${day}.${month}`; // Combine day and month to form the date string
 
-    const hour = ("0" + dateTime.getHours()).slice(-2) - 2; // Get the hour part and pad with a leading zero if necessary
-    const minute = ("0" + dateTime.getMinutes()).slice(-2); // Get the minute part and pad with a leading zero if necessary
-    const startTime = `${hour}:${minute}`; // Combine hour and minute to form the time string
-
-    return { date, startTime };
+    return date;
 }
 

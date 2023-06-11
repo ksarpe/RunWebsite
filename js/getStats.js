@@ -25,7 +25,7 @@ export function displayStats(json){
         sumTimeRun += element.moving_time;
         countRun++;
         break;
-      case 'Bike':
+      case 'Ride':
         if (element.moving_time < minTimeBike) {
           minTimeBike = element.moving_time;
         }
