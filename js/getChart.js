@@ -103,7 +103,7 @@ function updateCheckboxes(json) {
   json.reverse(); //reverse for correct order in checkboxes
 
   for (let i = 1; i <= 100; i++) {
-      let runForDay = json.find((_, index) => index+1 === i);
+      let text = i;
 
       let checkboxWrapper = document.createElement('div');
       checkboxWrapper.className = 'checkbox-wrapper';
@@ -129,8 +129,9 @@ function updateCheckboxes(json) {
       }
       if(i === 100){
         label.classList.add("last-day");
+        text = "IM";
       }
-      label.appendChild(document.createTextNode(i));
+      label.appendChild(document.createTextNode(text));
       
 
       checkboxWrapper.appendChild(checkbox);
