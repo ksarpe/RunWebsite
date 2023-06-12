@@ -39,10 +39,13 @@ export function displayActivities(jsonData) {
 
       //discipline
       if(run['type'] == "Ride"){
-        card.querySelector(`#discipline-${index + 1}`).textContent = "BIKE";
+        card.querySelector(`#discipline-${index + 1}`).textContent = "ROWER";
       }
-      else{
-        card.querySelector(`#discipline-${index + 1}`).textContent = run['type'].toUpperCase();
+      else if(run['type'] == "Run"){
+        card.querySelector(`#discipline-${index + 1}`).textContent = "BIEG";
+      }
+      else if(run['type'] == "Swim"){
+        card.querySelector(`#discipline-${index + 1}`).textContent = "PŁYWANIE";
       }
 
       if(run.type == "Run") card.querySelector(`#discipline-${index + 1}`).classList.add("run-tile");

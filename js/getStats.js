@@ -12,7 +12,7 @@ export function displayStats(json){
   document.getElementById('total').textContent = totalKM.toFixed(1);
   
   // show best time
-  let minTimeRun = 0, minTimeBike = Infinity, minTimeSwim = Infinity;
+  let minTimeRun = Infinity, minTimeBike = Infinity, minTimeSwim = Infinity;
   let sumTimeRun = 0, sumTimeBike = 0, sumTimeSwim = 0;
   let countRun = 0, countBike = 0, countSwim = 0;
 

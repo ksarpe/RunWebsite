@@ -45,21 +45,21 @@ function drawChart(json) {
       labels: [...Array(33).keys()].map(i => i + 1), // Array from 1 to 33
       datasets: [
         {
-          label: 'Run',
+          label: 'Bieg',
           data: chartDataRun,
           fill: false,
           borderColor: 'rgb(107, 224, 107)',
           tension: 0.1
         },
         {
-          label: 'Bike',
+          label: 'Rower',
           data: chartDataBike,
           fill: false,
           borderColor: 'rgb(222, 182, 89)',
           tension: 0.1
         },
         {
-          label: 'Swim',
+          label: 'Pływanie',
           data: chartDataSwim,
           fill: false,
           borderColor: 'rgb(89, 222, 222)',
@@ -79,13 +79,13 @@ function drawChart(json) {
           beginAtZero: true,
           title: {
             display: true,
-            text: 'Hours'
+            text: 'Czas(H)'
           }
         },
         x: {
           title: {
             display: true,
-            text: 'Discipline count'
+            text: 'Wykonane dyscypliny'
           }
         }
       }
