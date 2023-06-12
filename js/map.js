@@ -16,9 +16,6 @@ reAuthorize(1).then(res => {
     
     //add markers and polylines in cerain colors
     res.forEach((element, index) => {
-        var marker = L.marker(element.start_latlng).addTo(map);
-        marker.bindPopup(element.name + "<br>" + element.type + "<br>" + (element.distance/1000).toFixed(1) + "<br>" + (element.moving_time/3600).toFixed(1) + "H");
-
         //choose color for this one
         var color = colors[index % colors.length];
 

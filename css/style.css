@@ -23,6 +23,9 @@ body{
 .run-time{
   font-weight: 600;
 }
+.avg-time{
+  font-size: 1em;
+}
 
 .card {
   box-shadow: 0 4px 12px 0 rgba(0,0,0,0.7);

@@ -16,7 +16,8 @@ export function displayActivities(jsonData) {
             <div class="text-center">
               <div class="time">
                 <h4 class="card-title run-time" id="run-time-${index + 1}">CZAS</h4>
-              </div>         
+              </div>     
+              <h4 class="card-title avg-time" id="avg-time-${index + 1}">6:50/KM</h4>    
               <h4 class="card-title discipline" id="discipline-${index + 1}">RUN</h4>
               <h4 class="card-title distance" id="distance-${index + 1}">DISTANCE</h4>
             </div>                  
@@ -31,6 +32,10 @@ export function displayActivities(jsonData) {
       card.querySelector(`#run-date-${index + 1}`).textContent = date;
       const time = secondsToTime(run['moving_time']);
       card.querySelector(`#run-time-${index + 1}`).textContent = time;
+
+      //avg Speed
+      const avgSpeed = formatAvgSpeed(run['average_speed'], run['type']);
+      card.querySelector(`#avg-time-${index + 1}`).textContent = avgSpeed;
 
       //discipline
       if(run['type'] == "Ride"){
@@ -69,4 +74,24 @@ function splitDateTime(isoString) {
 
     return date;
 }
+
+function formatAvgSpeed(avgSpeed, type) {
+  let average_speed_m_s = avgSpeed;
+  let average_speed_min_km = 1000 / (average_speed_m_s * 60);
+
+  let minutes = Math.floor(average_speed_min_km);
+  let seconds = Math.round((average_speed_min_km - minutes) * 60);
+
+  if (type === "Swim") {
+      // Convert to minutes per 50 meters
+      let average_speed_min_50m = 50 / (average_speed_m_s * 60);
+      minutes = Math.floor(average_speed_min_50m);
+      seconds = Math.round((average_speed_min_50m - minutes) * 60);
+      
+      return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}/100m`;
+  } else {
+      return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}/km`;
+  }
+}
+
 
