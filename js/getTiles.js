@@ -91,7 +91,7 @@ function formatAvgSpeed(avgSpeed, type) {
       minutes = Math.floor(average_speed_min_50m);
       seconds = Math.round((average_speed_min_50m - minutes) * 60);
       
-      return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}/100m`;
+      return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}/50m`;
   } else {
       return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}/km`;
   }
